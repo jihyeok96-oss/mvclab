@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::main}, ~{::script})}">
+<head>
+    <title>회원 상세 | MVC Lab</title>
+</head>
+<body>
+<main>
+    <h1 class="h2 mb-4">회원 상세</h1>
+    <div class="card border-0 shadow-sm" th:object="${members}">
+        <div class="card-body p-4">
+            <dl class="row mb-0">
+                <dt class="col-sm-3 py-2">회원 번호</dt>
+                <dd class="col-sm-9 py-2" th:text="*{id}">1</dd>
+                <dt class="col-sm-3 py-2">이름(아이디)</dt>
+                <dd class="col-sm-9 py-2" th:text="*{name}">hong</dd>
+                <dt class="col-sm-3 py-2">이메일</dt>
+                <dd class="col-sm-9 py-2" th:text="*{email}">hong@example.com</dd>
+                <dt class="col-sm-3 py-2">나이</dt>
+                <dd class="col-sm-9 py-2" th:text="|*{age}세|">20세</dd>
+                <dt class="col-sm-3 py-2">가입일</dt>
+                <dd class="col-sm-9 py-2"
+                    th:text="*{createdAt != null ? #temporals.format(createdAt, 'yyyy-MM-dd HH:mm:ss') : '-'}">2026-09-16</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+        <a class="btn btn-secondary" th:href="@{/members}">목록</a>
+        <a class="btn btn-primary" th:href="@{/members/edit/{id}(id=${members.id})}">수정</a>
+        <button type="button" class="btn btn-danger js-delete-member"
+                th:data-member-id="${members.id}"
+                th:data-member-name="${members.name}">삭제</button>
+    </div>
+</main>
+<script th:src="@{/js/member.js}"></script>
+</body>
+</html>
