@@ -11,6 +11,7 @@ public class PasswordMatchValidator implements ConstraintValidator<PasswordMatch
         if (value == null) {
             return true;
         }
+
         if (value.getPassword() == null || value.getPasswordConfirm() == null) {
             return true;
         }

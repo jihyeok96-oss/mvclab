@@ -1,6 +1,5 @@
 package com.example.mvclab.member;
 
-import com.example.mvclab.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +14,27 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findById(Long id) throws MemberNotFoundException {
+    //Optional<Member> => Member
+    public Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(
-                () -> new MemberNotFoundException(id)
+                () -> new IllegalArgumentException(id + "존재하지 않는 회원입니다.")
         );
     }
 
-    public Member save(String name, String password, String email, Integer age) {
-        Member member = Member.builder()
-                .name(name)
-                .password(password)
-                .email(email)
-                .age(age)
-                .build();
-
-        return memberRepository.save(member);
+    //Member save
+    public Member save(String name, String email, Integer age, String password) {
+        return memberRepository.save(name, email, age, password);
     }
 
+    //Member update
     public void update(Long id, String name, String email, Integer age) {
-        Member member = Member.builder()
-                .id(id)
-                .name(name)
-                .email(email)
-                .age(age)
-                .build();
-
-        memberRepository.update(member);
+        findById(id);
+        memberRepository.update(id, name, email, age);
     }
 
+    //Member delete
     public void delete(Long id) {
-//        findById(id);
+        findById(id);
         memberRepository.delete(id);
     }
 }

@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 })
 @Retention(RUNTIME)
 public @interface PasswordMatch {
-    String message() default "비밀번호가 일치하지 않습니다";
+    String message() default "비밀번호가 일치하지 않습니다.";
 
     Class<?>[] groups() default {};
 

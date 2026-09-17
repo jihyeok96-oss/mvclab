@@ -1,7 +1,6 @@
 package com.example.mvclab.member;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
 public class Member {
     private Long id;
     private String name;

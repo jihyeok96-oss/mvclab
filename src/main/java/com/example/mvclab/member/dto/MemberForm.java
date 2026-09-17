@@ -13,21 +13,25 @@ import org.hibernate.validator.constraints.Range;
 public class MemberForm {
 
     private Long id;
-
+    //null "" " "
     @NotNull(message = "아이디는 null일 수 없습니다.")
     @NotEmpty(message = "아이디는 비어 있을 수 없습니다.")
     @NotBlank(message = "아이디를 입력해주세요")
     @Size(
             min = 2,
             max = 20,
-            message = "아이디는 2 ~ 20 자여야 합니다."
+            message = "아이디는 2~20자여야 합니다."
     )
     private String name;
 
-    @NotBlank(message = "비밀번호는 필수 입력 항목입니다.")
+    @NotBlank(message = "이메일은 필수 입력항목입니다.")
+    @Email(message = "이메일 형식이 아닙니다.")
+    private String email;
+
+    @NotBlank(message = "비밀번호는 필수 입력항목입니다.")
     @Size(
             min = 4, max = 20,
-            message = "비밀번호는 4자 이상 20자 이하로 작성해주십시오."
+            message = "비밀번호는 4~20자여야 합니다."
     )
     @Pattern(
             regexp = "^[a-zA-Z0-9]+$",
@@ -35,17 +39,14 @@ public class MemberForm {
     )
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "비밀번호 확인은 필수 입력항목입니다.")
     private String passwordConfirm;
 
-    @NotBlank(message = "이메일은 필수 입력항목입니다.")
-    @Email(message = "이메일 형식이 아닙니다.")
-    private String email;
-
-    @Min(value = 19, message = "미성년자는 가입할 수 없습니다.")
-    @Max(value = 150, message = "문의주시면 다시 가입 가능하게 조치하겠습니다. 010-xxxx-xxxx")
+    @Min(value = 1, message = "나이는 최소 1살 이상이어야 합니다.")
+    @Max(value = 150, message = "나이는 최대 150살 이하이어야 합니다.")
     @Range(
-            min = 19, max = 150, message = "가입 가능 연령은 19세 ~ 150세 입니다."
+            min = 1, max = 150,
+            message = "나이는 1살~150살 사이여야 합니다."
     )
     @Positive(message = "나이는 양수여야 합니다.")
     private Integer age;
