@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layout/base :: layout(~{::title}, ~{::main}, ~{::script})}">
-<head>
-    <title>홈 | MVC Lab</title>
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf/org">
+<head th:replace="~{layout/base::head('홈'}">
 </head>
 <body>
-<main>
-    <section class="p-5 bg-white rounded-3 shadow-sm text-center">
-        <h1 class="display-5 fw-bold mb-3">회원 관리 서비스</h1>
-        <p class="lead text-secondary mb-4">Spring MVC와 Thymeleaf로 만든 회원 관리 예제입니다.</p>
-        <a class="btn btn-primary me-2" th:href="@{/members}">회원 목록</a>
-        <a class="btn btn-outline-primary" th:href="@{/members/join}">회원가입</a>
-    </section>
+<header th:replace="~{layout/base::header}">
+</header>
+<main class="section">
+    <div class="container">
+
+    </div>
 </main>
-<script></script>
+<footer th:replace="~{layout/base::footer}">
+</footer>
 </body>
 </html>
