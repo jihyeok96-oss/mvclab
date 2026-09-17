@@ -149,7 +149,7 @@ document.addEventListener(
                         '회원 정보가 수정되었습니다.'
                     );
                     window.location.href =
-                        '/members';
+                        '/members/'+memberId;
                 } catch (error) {
                     console.error(error);
                     alert(

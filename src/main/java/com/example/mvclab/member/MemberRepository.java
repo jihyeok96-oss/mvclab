@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -82,19 +83,27 @@ public class MemberRepository {
             return ps;
         }, keyHolder);
 
-        Long id = keyHolder.getKey().longValue();
+        Map<String, Object> keys = keyHolder.getKeys();
+
+        if (keys == null || keys.get("id") == null) {
+            throw new IllegalStateException(
+                    "생성된 회원 ID를 가져오지 못했습니다."
+            );
+        }
+
+        Long id = ((Number) keys.get("id")).longValue();
 
         return findById(id).orElseThrow();
     }
 
-    public void update(Long id, String name, String email, Integer age) {
+    public void update(Long id, String name, String email, Integer age, String password) {
         String sql = """
-                UPDATE members 
-                SET name=?, email=?, age=?  
+                UPDATE members
+                SET name=?, email=?, age=?, password=?
                 WHERE id=?;
                 """;
 
-        jdbcTemplate.update(sql, name, email, age, id);
+        jdbcTemplate.update(sql, name, email, age, password, id);
     }
 
     public void delete(Long id) {

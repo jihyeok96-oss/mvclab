@@ -78,11 +78,12 @@ public class MemberController {
         form.setPassword(member.getPassword());
         form.setPasswordConfirm(member.getPassword());
         model.addAttribute("memberForm", form);
-        return "member/edit";
+        return "members/edit";
     }
 
     //회원 정보 수정 처리
     @PutMapping("/edit/{id}")
+    @ResponseBody
     public String update(
             @PathVariable("id") Long id,
 
@@ -99,9 +100,9 @@ public class MemberController {
         //MemberForm => Member
         memberService.update(
                 id, form.getName(), form.getEmail(),
-                form.getAge()
+                form.getAge(), form.getPassword()
         );
-        return "redirect:/members";
+        return "redirect:/members/" + id;
     }
 
     //회원 정보 삭제

@@ -27,9 +27,9 @@ public class MemberService {
     }
 
     //Member update
-    public void update(Long id, String name, String email, Integer age) {
+    public void update(Long id, String name, String email, Integer age, String password) {
         findById(id);
-        memberRepository.update(id, name, email, age);
+        memberRepository.update(id, name, email, age, password);
     }
 
     //Member delete
