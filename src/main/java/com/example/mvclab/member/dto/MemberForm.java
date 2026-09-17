@@ -30,7 +30,7 @@ public class MemberForm {
             message = "비밀번호는 4자 이상 20자 이하로 작성해주십시오."
     )
     @Pattern(
-            regexp = "^[a-zA-z0-9]+$",
+            regexp = "^[a-zA-Z0-9]+$",
             message = "비밀번호는 영문과 숫자만 사용할 수 있습니다."
     )
     private String password;

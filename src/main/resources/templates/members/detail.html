@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head('회원 정보 상세보기')}">
+</head>
+<body>
+<header th:replace="~{layout/base :: header}">
+</header>
+<main class="section">
+    <div class="container">
+        <div class="detail-card">
+            <!-- Header -->
+            <div class="page-header">
+                <h1 class="title">
+                    회원 상세
+                </h1>
+                <p class="subtitle">
+                    회원의 상세 정보를 확인합니다.
+                </p>
+            </div>
+            <!-- Detail Card -->
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        회원 정보
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <!-- ID -->
+                        <div class="columns">
+                            <div class="column is-3">
+                                <strong>ID</strong>
+                            </div>
+                            <div class="column"
+                                 th:text="${member.id}">
+                                1
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Name -->
+                        <div class="columns">
+                            <div class="column is-3">
+                                <strong>이름</strong>
+                            </div>
+                            <div class="column"
+                                 th:text="${member.name}">
+                                홍길동
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Email -->
+                        <div class="columns">
+                            <div class="column is-3">
+                                <strong>이메일</strong>
+                            </div>
+                            <div class="column"
+                                 th:text="${member.email}">
+                                hong@example.com
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Age -->
+                        <div class="columns">
+                            <div class="column is-3">
+                                <strong>나이</strong>
+                            </div>
+                            <div class="column"
+                                 th:text="${member.age}">
+                                30
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Created At -->
+                        <div class="columns">
+                            <div class="column is-3">
+                                <strong>등록일</strong>
+                            </div>
+                            <div class="column"
+                                 th:text="${member.createdAt}">
+                                2026-09-17T10:00:00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <footer class="card-footer">
+                    <a class="card-footer-item"
+                       th:href="@{/members}">
+                        목록
+                    </a>
+                    <a class="card-footer-item has-text-warning-dark"
+                       th:href="@{/members/edit/{id}(id=${member.id})}">
+                        수정
+                    </a>
+                    <button
+                            type="button"
+                            class="card-footer-item has-text-danger"
+                            th:attr="data-member-id=${member.id}"
+                            onclick="deleteMember(this)">
+                        삭제
+                    </button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{layout/base :: footer}"></footer>
+<script th:src="@{/js/member.js}"></script>
+</body>
+</html>

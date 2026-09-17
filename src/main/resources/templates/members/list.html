@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head('회원목록')}">
+</head>
+<body>
+<header th:replace="~{layout/base :: header}">
+</header>
+<main class="section">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="level page-header">
+            <div class="level-left">
+                <div>
+                    <h1 class="title">
+                        회원 목록
+                    </h1>
+                    <p class="subtitle">
+                        등록된 회원 정보를 조회합니다.
+                    </p>
+                </div>
+            </div>
+            <div class="level-right">
+                <a class="button is-link"
+                   th:href="@{/members/new}">
+                    <span>+</span>
+                    <span>회원 등록</span>
+                </a>
+            </div>
+        </div>
+        <!-- 등록 메시지 -->
+        <div th:if="${param.message}"
+             class="notification is-success is-light">
+            <button class="delete"
+                    onclick="this.parentElement.remove()">
+            </button>
+            <span th:text="${param.message}">
+                회원이 등록되었습니다.
+            </span>
+        </div>
+        <!-- Member Table -->
+        <div class="card">
+            <div class="card-content">
+                <div class="table-container">
+                    <table class="table is-fullwidth is-hoverable is-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>이름</th>
+                            <th>이메일</th>
+                            <th>나이</th>
+                            <th>등록일</th>
+                            <th class="has-text-centered">
+                                관리
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 회원이 존재하는 경우 -->
+                        <tr th:each="member : ${members}">
+                            <td th:text="${member.id}">
+                                1
+                            </td>
+                            <td>
+                                <a th:href="@{/members/{id}(id=${member.id})}"
+                                   th:text="${member.name}">
+                                    kkt
+                                </a>
+                            </td>
+                            <td th:text="${member.email}">
+                                hong@example.com
+                            </td>
+                            <td th:text="${member.age}">
+                                30
+                            </td>
+                            <td th:text="${member.createdAt}">
+                                2026-09-17 10:00
+                            </td>
+                            <td class="has-text-centered">
+                                <div class="buttons is-centered are-small">
+                                    <a class="button is-info is-light"
+                                       th:href="@{/members/{id}(id=${member.id})}">
+                                        상세
+                                    </a>
+                                    <a class="button is-warning is-light"
+                                       th:href="@{/members/edit/{id}(id=${member.id})}">
+                                        수정
+                                    </a>
+                                    <button
+                                            type="button"
+                                            class="button is-danger is-light"
+                                            th:attr="data-member-id=${member.id}"
+                                            onclick="deleteMember(this)">
+                                        강제탈퇴
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 회원이 없는 경우 -->
+                        <tr th:if="${#lists.isEmpty(members)}">
+                            <td colspan="6">
+                                <div class="empty-message">
+                                    <p class="title is-5">
+                                        등록된 회원이 없습니다.
+                                    </p>
+                                    <p class="mb-5 has-text-grey">
+                                        첫 번째 회원을 등록해보세요.
+                                    </p>
+                                    <a class="button is-link"
+                                       th:href="@{/members/new}">
+                                        회원 등록
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{layout/base :: footer}"></footer>
+<script th:src="@{/js/member.js}"></script>
+</body>
+</html>
